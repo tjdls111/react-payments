@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import AddCardInfo from './AddCard.tsx'
 import FinishAddingCard from './FinishAddingCard.tsx'
-import { PAGE_TYPE } from '../../App.tsx'
+import { ADD_CARD_STEP_TYPE, PAGE_TYPE } from '../../App.tsx'
 
 export interface CardData {
   numberOne: string
@@ -19,30 +19,26 @@ export interface CardData {
 }
 const AddCard = ({
   setPage,
-  addCardList,
+  step,
+  setStep,
+  setCardList,
+  inputs,
+  setInputs,
+  currentCardIndex,
+  setCurrentCardInputs,
+  setCurrentCardIndex,
 }: {
   setPage: (step: PAGE_TYPE) => void
-  addCardList: (newCard: CardData) => void
+  step: ADD_CARD_STEP_TYPE
+  setStep: (step: ADD_CARD_STEP_TYPE) => void
+  setCardList: React.Dispatch<React.SetStateAction<CardData[]>>
+  inputs: CardData | undefined
+  setInputs: (cardData: CardData) => void
+  currentCardIndex?: number
+  setCurrentCardInputs?: (cardData: CardData | undefined) => void
+  setCurrentCardIndex?: (index: number | undefined) => void
 }) => {
-  const [step, setStep] = useState<'카드정보' | '카드선택' | '생성완료'>(
-    '카드정보'
-  )
-
-  const [inputs, setInputs] = useState<CardData>({
-    numberOne: '',
-    numberTwo: '',
-    numberThree: '',
-    numberFour: '',
-    expiredMonth: '',
-    expiredYear: '',
-    ownerName: '',
-    CVC: '',
-    passwordOne: '',
-    passwordTwo: '',
-    nickname: '',
-    companyName: '',
-  })
-
+  if (!inputs) return ''
   return (
     <div>
       {step === '카드정보' && (
@@ -70,8 +66,36 @@ const AddCard = ({
             companyName: inputs.companyName,
           }}
           handleSubmit={() => {
-            addCardList(inputs)
+            if (currentCardIndex === undefined) {
+              setCardList((prev: CardData[]) => [...prev, inputs])
+            } else {
+              setCardList((prev: CardData[]) => {
+                prev[currentCardIndex] = inputs
+                return [...prev]
+              })
+            }
+
             setPage('카드목록')
+            setStep('카드정보')
+            if (setCurrentCardInputs) {
+              setCurrentCardInputs({
+                numberOne: '',
+                numberTwo: '',
+                numberThree: '',
+                numberFour: '',
+                expiredMonth: '',
+                expiredYear: '',
+                ownerName: '',
+                CVC: '',
+                passwordOne: '',
+                passwordTwo: '',
+                nickname: '',
+                companyName: '',
+              })
+            }
+            if (setCurrentCardIndex) {
+              setCurrentCardIndex(undefined)
+            }
           }}
         />
       )}

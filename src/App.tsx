@@ -4,9 +4,10 @@ import CardList from './pages/CardList.tsx'
 import AddCard, { CardData } from './pages/AddCard/index.tsx'
 
 export type PAGE_TYPE = '카드목록' | '카드추가'
-
+export type ADD_CARD_STEP_TYPE = '카드정보' | '카드선택' | '생성완료'
 function App() {
   const [page, setPage] = useState<PAGE_TYPE>('카드목록')
+  const [addCardStep, setAddCardStep] = useState<ADD_CARD_STEP_TYPE>('카드정보')
   const defaultCardList = [
     {
       numberOne: '1111',
@@ -40,17 +41,52 @@ function App() {
 
   const [cardList, setCardList] = useState(defaultCardList)
 
-  const addCardList = (newCard: CardData) => {
-    setCardList([newCard, ...cardList])
-  }
+  // const addCardList = (newCard: CardData) => {
+  //   setCardList([newCard, ...cardList])
+  // }
+  const [currentCardInputs, setCurrentCardInputs] = useState<
+    CardData | undefined
+  >({
+    numberOne: '',
+    numberTwo: '',
+    numberThree: '',
+    numberFour: '',
+    expiredMonth: '',
+    expiredYear: '',
+    ownerName: '',
+    CVC: '',
+    passwordOne: '',
+    passwordTwo: '',
+    nickname: '',
+    companyName: '',
+  })
+  const [currentCardIndex, setCurrentCardIndex] = useState<number | undefined>(
+    undefined
+  )
 
   return (
     <div className="App">
       {page === '카드목록' && (
-        <CardList setPage={setPage} cardList={cardList} />
+        <CardList
+          setStep={setAddCardStep}
+          setPage={setPage}
+          cardList={cardList}
+          setInputs={setCurrentCardInputs}
+          setCurrentCardIndex={setCurrentCardIndex}
+        />
       )}
       {page === '카드추가' && (
-        <AddCard setPage={setPage} addCardList={addCardList} />
+        <AddCard
+          step={addCardStep}
+          setStep={setAddCardStep}
+          setPage={setPage}
+          setCardList={setCardList}
+          inputs={currentCardInputs}
+          setInputs={setCurrentCardInputs}
+          currentCardIndex={currentCardIndex}
+          setCurrentCardInputs={setCurrentCardInputs}
+          setCurrentCardIndex={setCurrentCardIndex}
+        />
       )}
     </div>
   )
