@@ -56,18 +56,11 @@ const AddCard = ({
       {/* {step==='카드선택'&& <ChooseCard />} */}
       {step === '생성완료' && (
         <FinishAddingCard
-          props={{
-            numberOne: inputs.numberOne,
-            numberTwo: inputs.numberTwo,
-            ownerName: inputs.ownerName,
-            expiredMonth: inputs.expiredMonth,
-            expiredYear: inputs.expiredYear,
-            nickname: inputs.nickname,
-            companyName: inputs.companyName,
-          }}
+          inputs={inputs}
+          setInputs={setInputs}
           handleSubmit={() => {
             if (currentCardIndex === undefined) {
-              setCardList((prev: CardData[]) => [...prev, inputs])
+              setCardList((prev: CardData[]) => [inputs, ...prev])
             } else {
               setCardList((prev: CardData[]) => {
                 prev[currentCardIndex] = inputs

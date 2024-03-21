@@ -1,17 +1,18 @@
 import React, { useState } from 'react'
-import Card, { CardInputProps } from '../../components/Card.tsx'
+import Card from '../../components/Card.tsx'
 import Button from '../../components/Button.tsx'
 import Title from '../../components/Title.tsx'
+import { CardData } from './index.tsx'
 
 const FinishAddingCard = ({
-  props,
+  inputs,
+  setInputs,
   handleSubmit,
 }: {
-  props: CardInputProps
+  inputs: CardData
+  setInputs: (cardData: CardData) => void
   handleSubmit: () => void
 }) => {
-  const [nickname, setNickname] = useState<string>('')
-
   return (
     <>
       <div className="root">
@@ -19,16 +20,26 @@ const FinishAddingCard = ({
           <div className="flex-center">
             <Title className="mb-10">카드등록이 완료되었습니다.</Title>
           </div>
-          <Card props={{ ...props, nickname }} />
+          <Card props={inputs} />
           <div className="input-container flex-center w-100">
             <input
               className="input-underline w-75"
               type="text"
-              placeholder="카드의 별칭을 입력해주세요."
-              onChange={(e) => setNickname(e.target.value)}
+              defaultValue={inputs.nickname}
+              maxLength={10}
+              placeholder="카드 별칭(선택)"
+              onChange={(e) =>
+                setInputs({ ...inputs, nickname: e.target.value })
+              }
             />
           </div>
-          <Button onClick={handleSubmit}>확인</Button>
+          <Button
+            onClick={() => {
+              handleSubmit()
+            }}
+          >
+            확인
+          </Button>
         </div>
       </div>
     </>
