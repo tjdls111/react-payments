@@ -1,41 +1,32 @@
 import React from 'react'
 import Title from '../components/Title.tsx'
 import { PAGE_TYPE } from '../App.tsx'
+import Card from '../components/Card.tsx'
+import { CardData } from './AddCard/index.tsx'
 
-const CardList = ({ setPage }: { setPage: (step: PAGE_TYPE) => void }) => {
+const CardList = ({
+  setPage,
+  cardList,
+}: {
+  setPage: (step: PAGE_TYPE) => void
+  cardList: CardData[]
+}) => {
   return (
     <>
       <h2>5️⃣ 카드 목록</h2>
       <div className="root">
+        <div className="card-box">
+          <button onClick={() => setPage('카드추가')} className="empty-card">
+            +
+          </button>
+        </div>
         <div className="app flex-column-center">
           <div className="flex-center">
             <Title className="mb-10">보유 카드</Title>
           </div>
-          <div className="card-box">
-            <div className="small-card">
-              <div className="card-top">
-                <span className="card-text">클린카드</span>
-              </div>
-              <div className="card-middle">
-                <div className="small-card__chip"></div>
-              </div>
-              <div className="card-bottom">
-                <div className="card-bottom__number">
-                  <span className="card-text">1111 - 2222 - oooo - oooo</span>
-                </div>
-                <div className="card-bottom__info">
-                  <span className="card-text">YUJO</span>
-                  <span className="card-text">12 / 23</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <span className="card-nickname">법인카드</span>
-          <div className="card-box">
-            <button onClick={() => setPage('카드추가')} className="empty-card">
-              +
-            </button>
-          </div>
+          {cardList.map((card, index) => {
+            return <Card key={index} props={card} />
+          })}
         </div>
       </div>
     </>

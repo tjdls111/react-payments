@@ -4,33 +4,43 @@ import FinishAddingCard from './FinishAddingCard.tsx'
 import { PAGE_TYPE } from '../../App.tsx'
 
 export interface CardData {
-  cardNumberOne: string
-  cardNumberTwo: string
-  cardNumberThree: string
-  cardNumberFour: string
+  numberOne: string
+  numberTwo: string
+  numberThree: string
+  numberFour: string
   expiredMonth: string
   expiredYear: string
   ownerName: string
   CVC: string
-  cardPasswordOne: string
-  cardPasswordTwo: string
+  passwordOne: string
+  passwordTwo: string
+  nickname: string
+  companyName: string
 }
-const AddCard = ({ setPage }: { setPage: (step: PAGE_TYPE) => void }) => {
+const AddCard = ({
+  setPage,
+  addCardList,
+}: {
+  setPage: (step: PAGE_TYPE) => void
+  addCardList: (newCard: CardData) => void
+}) => {
   const [step, setStep] = useState<'카드정보' | '카드선택' | '생성완료'>(
     '카드정보'
   )
 
   const [inputs, setInputs] = useState<CardData>({
-    cardNumberOne: '',
-    cardNumberTwo: '',
-    cardNumberThree: '',
-    cardNumberFour: '',
+    numberOne: '',
+    numberTwo: '',
+    numberThree: '',
+    numberFour: '',
     expiredMonth: '',
     expiredYear: '',
     ownerName: '',
     CVC: '',
-    cardPasswordOne: '',
-    cardPasswordTwo: '',
+    passwordOne: '',
+    passwordTwo: '',
+    nickname: '',
+    companyName: '',
   })
 
   return (
@@ -51,13 +61,16 @@ const AddCard = ({ setPage }: { setPage: (step: PAGE_TYPE) => void }) => {
       {step === '생성완료' && (
         <FinishAddingCard
           props={{
-            cardNumberOne: inputs.cardNumberOne,
-            cardNumberTwo: inputs.cardNumberTwo,
+            numberOne: inputs.numberOne,
+            numberTwo: inputs.numberTwo,
             ownerName: inputs.ownerName,
             expiredMonth: inputs.expiredMonth,
             expiredYear: inputs.expiredYear,
+            nickname: inputs.nickname,
+            companyName: inputs.companyName,
           }}
           handleSubmit={() => {
+            addCardList(inputs)
             setPage('카드목록')
           }}
         />

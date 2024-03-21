@@ -1,5 +1,5 @@
 import React from 'react'
-import CardNumberInput from '../../components/CardNumberInput.tsx'
+import NumberInput from '../../components/CardNumberInput.tsx'
 import DateInput from '../../components/DateInput.tsx'
 import Input from '../../components/Input.tsx'
 import Button from '../../components/Button.tsx'
@@ -54,13 +54,13 @@ const AddCardInfo = ({
               </div>
               <div className="card-bottom">
                 <span className="card-text">
-                  {inputs.cardNumberOne}
-                  {inputs.cardNumberOne && '-'}
-                  {inputs.cardNumberTwo}
-                  {inputs.cardNumberTwo && '-'}
-                  {'*'.repeat(inputs.cardNumberThree.length)}
-                  {inputs.cardNumberThree && '-'}
-                  {'*'.repeat(inputs.cardNumberFour.length)}
+                  {inputs.numberOne}
+                  {inputs.numberOne && '-'}
+                  {inputs.numberTwo}
+                  {inputs.numberTwo && '-'}
+                  {'*'.repeat(inputs.numberThree.length)}
+                  {inputs.numberThree && '-'}
+                  {'*'.repeat(inputs.numberFour.length)}
                 </span>
                 <div className="card-bottom__info">
                   <span className="card-text">{inputs.ownerName}</span>
@@ -73,46 +73,46 @@ const AddCardInfo = ({
           </div>
           <div className="input-container">
             <span className="input-title">카드 번호</span>
-            <CardNumberInput
+            <NumberInput
               divider="-"
               inputs={[
                 {
                   type: 'text',
                   maxLength: CARD_ONE_SECTION_NUMBER_LENGTH,
-                  value: inputs.cardNumberOne,
+                  value: inputs.numberOne,
                   onChange: (e) => {
                     if (numeric_only_regex.test(e.target.value)) {
-                      setInputs({ ...inputs, cardNumberOne: e.target.value })
+                      setInputs({ ...inputs, numberOne: e.target.value })
                     }
                   },
                 },
                 {
                   type: 'text',
                   maxLength: CARD_ONE_SECTION_NUMBER_LENGTH,
-                  value: inputs.cardNumberTwo,
+                  value: inputs.numberTwo,
                   onChange: (e) => {
                     if (numeric_only_regex.test(e.target.value)) {
-                      setInputs({ ...inputs, cardNumberTwo: e.target.value })
+                      setInputs({ ...inputs, numberTwo: e.target.value })
                     }
                   },
                 },
                 {
                   type: 'password',
                   maxLength: CARD_ONE_SECTION_NUMBER_LENGTH,
-                  value: inputs.cardNumberThree,
+                  value: inputs.numberThree,
                   onChange: (e) => {
                     if (numeric_only_regex.test(e.target.value)) {
-                      setInputs({ ...inputs, cardNumberThree: e.target.value })
+                      setInputs({ ...inputs, numberThree: e.target.value })
                     }
                   },
                 },
                 {
                   type: 'password',
                   maxLength: CARD_ONE_SECTION_NUMBER_LENGTH,
-                  value: inputs.cardNumberFour,
+                  value: inputs.numberFour,
                   onChange: (e) => {
                     if (numeric_only_regex.test(e.target.value)) {
-                      setInputs({ ...inputs, cardNumberFour: e.target.value })
+                      setInputs({ ...inputs, numberFour: e.target.value })
                     }
                   },
                 },
@@ -168,18 +168,18 @@ const AddCardInfo = ({
                 type="password"
                 maxLength={1}
                 widthSize="sm"
-                value={inputs.cardPasswordOne}
+                value={inputs.passwordOne}
                 onChange={(e) => {
-                  setInputs({ ...inputs, cardPasswordOne: e.target.value })
+                  setInputs({ ...inputs, passwordOne: e.target.value })
                 }}
               />
               <Input
                 type="password"
                 maxLength={1}
                 widthSize="sm"
-                value={inputs.cardPasswordTwo}
+                value={inputs.passwordTwo}
                 onChange={(e) => {
-                  setInputs({ ...inputs, cardPasswordTwo: e.target.value })
+                  setInputs({ ...inputs, passwordTwo: e.target.value })
                 }}
               />
               <span>*</span>
