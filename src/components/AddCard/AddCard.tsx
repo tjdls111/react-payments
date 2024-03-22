@@ -1,14 +1,14 @@
 import React from 'react'
-import NumberInput from '../../components/CardNumberInput.tsx'
-import DateInput from '../../components/DateInput.tsx'
-import Input from '../../components/Input.tsx'
-import Button from '../../components/Button.tsx'
-import Title from '../../components/Title.tsx'
-import IconButton from '../../components/IconButton.tsx'
-import { CardData } from './index.tsx'
+import NumberInput from '../common/CardNumberInput.tsx'
+import DateInput from '../common/DateInput.tsx'
+import Input from '../common/Input.tsx'
+import Button from '../common/Button.tsx'
+import Title from '../common/Title.tsx'
+import IconButton from '../common/IconButton.tsx'
+import { CardData } from '../RegisterCard.tsx'
+import useAddCard, { numeric_only_regex } from './useAddCard.ts'
 
 const CARD_ONE_SECTION_NUMBER_LENGTH = 4
-const numeric_only_regex = /^[0-9]*$/
 
 const AddCardInfo = ({
   handleSubmit,
@@ -21,19 +21,10 @@ const AddCardInfo = ({
   setInputs: (cardData: CardData) => void
   handleBack: () => void
 }) => {
-  const handleChangeExpiredMonth = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!numeric_only_regex.test(String(e.target.value))) {
-      return
-    } else if (parseInt(e.target.value) > 12) {
-      alert('카드 만료 날짜 - 월을 확인해주세요.')
-      return
-    }
-    setInputs({ ...inputs, expiredMonth: e.target.value })
-  }
-
-  const handleChangeExpiredYear = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputs({ ...inputs, expiredYear: e.target.value })
-  }
+  const { handleChangeExpiredMonth, handleChangeExpiredYear } = useAddCard({
+    inputs,
+    setInputs,
+  })
 
   return (
     <>

@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import Card from '../../components/Card.tsx'
-import Button from '../../components/Button.tsx'
-import Title from '../../components/Title.tsx'
-import { CardData } from './index.tsx'
+import Card from '../common/Card.tsx'
+import Button from '../common/Button.tsx'
+import Title from '../common/Title.tsx'
+import { CardData } from '../RegisterCard.tsx'
 
 const FinishAddingCard = ({
   inputs,

@@ -1,8 +1,8 @@
 import React from 'react'
-import Title from '../components/Title.tsx'
-import { ADD_CARD_STEP_TYPE, PAGE_TYPE } from '../App.tsx'
-import Card from '../components/Card.tsx'
-import { CardData } from './AddCard/index.tsx'
+import Title from './common/Title.tsx'
+import Card from './common/Card.tsx'
+import { CardData } from './RegisterCard.tsx'
+import { ADD_CARD_STEP_TYPE, PAGE_TYPE } from '../types/card.ts'
 
 const CardList = ({
   setPage,

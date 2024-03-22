@@ -21,6 +21,6 @@ export const Password: Story = {
 
 export const SizeMd: Story = {
   args: {
-    size: 'md',
+    widthSize: 'md',
   },
 }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import AddCardInfo from './AddCard.tsx'
-import FinishAddingCard from './FinishAddingCard.tsx'
-import { ADD_CARD_STEP_TYPE, PAGE_TYPE } from '../../App.tsx'
+import AddCardInfo from './AddCard/AddCard.tsx'
+import FinishAddingCard from './AddCard/FinishAddingCard.tsx'
+import { ADD_CARD_STEP_TYPE, PAGE_TYPE } from '../types/card.ts'
 
 export interface CardData {
   numberOne: string
