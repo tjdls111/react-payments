@@ -3,6 +3,23 @@ import Title from './common/Title.tsx'
 import Card from './common/Card.tsx'
 import { CardData } from './RegisterCard.tsx'
 import { ADD_CARD_STEP_TYPE, PAGE_TYPE } from '../types/card.ts'
+import styled from 'styled-components'
+
+const CardListWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 10px 0;
+  overflow-y: auto;
+  height: calc(100% - 100px);
+`
+
+const NoneStyledButton = styled.button`
+  border: none;
+  padding: 0;
+  background-color: transparent;
+`
 
 const CardList = ({
   setPage,
@@ -19,20 +36,12 @@ const CardList = ({
 }) => {
   return (
     <>
-      <h2>5️⃣ 카드 목록</h2>
       <div className="root">
-        <div className="card-box">
-          <button onClick={() => setPage('카드추가')} className="empty-card">
-            +
-          </button>
-        </div>
-        <div className="app flex-column-center">
-          <div className="flex-center">
-            <Title className="mb-10">보유 카드</Title>
-          </div>
+        <Title className="p-5">보유 카드</Title>
+        <CardListWrapper>
           {cardList.map((card, index) => {
             return (
-              <button
+              <NoneStyledButton
                 key={index}
                 onClick={() => {
                   setInputs(card)
@@ -42,10 +51,13 @@ const CardList = ({
                 }}
               >
                 <Card props={card} />
-              </button>
+              </NoneStyledButton>
             )
           })}
-        </div>
+          <button onClick={() => setPage('카드추가')} className="empty-card">
+            +
+          </button>
+        </CardListWrapper>
       </div>
     </>
   )

@@ -11,7 +11,9 @@
   align-items: center;
 }
 
-
+.p-5 {
+  padding: 1.25rem;
+}
 .mt-10 {
   margin-top: 2.5rem;
 }
@@ -56,6 +58,6 @@
   width: 15%;
 }
 
-.gap-4{
-  gap:4px;
+.gap-4 {
+  gap: 4px;
 }
