@@ -32,13 +32,76 @@ const AddCard = ({
   step: ADD_CARD_STEP_TYPE
   setStep: (step: ADD_CARD_STEP_TYPE) => void
   setCardList: React.Dispatch<React.SetStateAction<CardData[]>>
-  inputs: CardData | undefined
+  inputs: CardData
   setInputs: (cardData: CardData) => void
   currentCardIndex?: number
-  setCurrentCardInputs?: (cardData: CardData | undefined) => void
+  setCurrentCardInputs?: (cardData: CardData) => void
   setCurrentCardIndex?: (index: number | undefined) => void
 }) => {
-  if (!inputs) return ''
+  const handleSubmit = () => {
+    if (currentCardIndex === undefined) {
+      setCardList((prev: CardData[]) => [inputs, ...prev])
+    } else {
+      setCardList((prev: CardData[]) => {
+        prev[currentCardIndex] = inputs
+        return [...prev]
+      })
+    }
+    setPage('카드목록')
+    setStep('카드정보')
+    if (setCurrentCardInputs) {
+      setCurrentCardInputs({
+        numberOne: '',
+        numberTwo: '',
+        numberThree: '',
+        numberFour: '',
+        expiredMonth: '',
+        expiredYear: '',
+        ownerName: '',
+        CVC: '',
+        passwordOne: '',
+        passwordTwo: '',
+        nickname: '',
+        companyName: '',
+      })
+    }
+    if (setCurrentCardIndex) {
+      setCurrentCardIndex(undefined)
+    }
+  }
+
+  const handleDelete = () => {
+    if (currentCardIndex !== undefined) {
+      setCardList((prev: CardData[]) => {
+        const current = prev.splice(currentCardIndex, 1)
+        return [...current]
+      })
+    }
+
+    setPage('카드목록')
+    setStep('카드정보')
+
+    if (setCurrentCardInputs) {
+      setCurrentCardInputs({
+        numberOne: '',
+        numberTwo: '',
+        numberThree: '',
+        numberFour: '',
+        expiredMonth: '',
+        expiredYear: '',
+        ownerName: '',
+        CVC: '',
+        passwordOne: '',
+        passwordTwo: '',
+        nickname: '',
+        companyName: '',
+      })
+    }
+    if (setCurrentCardIndex) {
+      setCurrentCardIndex(undefined)
+    }
+  }
+
   return (
     <div>
       {step === '카드정보' && (
@@ -58,38 +121,9 @@ const AddCard = ({
         <FinishAddingCard
           inputs={inputs}
           setInputs={setInputs}
-          handleSubmit={() => {
-            if (currentCardIndex === undefined) {
-              setCardList((prev: CardData[]) => [inputs, ...prev])
-            } else {
-              setCardList((prev: CardData[]) => {
-                prev[currentCardIndex] = inputs
-                return [...prev]
-              })
-            }
-
-            setPage('카드목록')
-            setStep('카드정보')
-            if (setCurrentCardInputs) {
-              setCurrentCardInputs({
-                numberOne: '',
-                numberTwo: '',
-                numberThree: '',
-                numberFour: '',
-                expiredMonth: '',
-                expiredYear: '',
-                ownerName: '',
-                CVC: '',
-                passwordOne: '',
-                passwordTwo: '',
-                nickname: '',
-                companyName: '',
-              })
-            }
-            if (setCurrentCardIndex) {
-              setCurrentCardIndex(undefined)
-            }
-          }}
+          handleSubmit={handleSubmit}
+          handleDelete={handleDelete}
+          currentInputIndex={currentCardIndex}
         />
       )}
     </div>

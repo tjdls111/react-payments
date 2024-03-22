@@ -7,11 +7,15 @@ import { CardData } from './index.tsx'
 const FinishAddingCard = ({
   inputs,
   setInputs,
+  handleDelete,
   handleSubmit,
+  currentInputIndex,
 }: {
   inputs: CardData
   setInputs: (cardData: CardData) => void
+  handleDelete: () => void
   handleSubmit: () => void
+  currentInputIndex?: number
 }) => {
   return (
     <>
@@ -33,13 +37,12 @@ const FinishAddingCard = ({
               }
             />
           </div>
-          <Button
-            onClick={() => {
-              handleSubmit()
-            }}
-          >
-            확인
-          </Button>
+          <div className="flex-center">
+            {currentInputIndex !== undefined && (
+              <Button onClick={handleDelete}>삭제</Button>
+            )}
+            <Button onClick={handleSubmit}>확인</Button>
+          </div>
         </div>
       </div>
     </>

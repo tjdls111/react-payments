@@ -44,9 +44,7 @@ function App() {
   // const addCardList = (newCard: CardData) => {
   //   setCardList([newCard, ...cardList])
   // }
-  const [currentCardInputs, setCurrentCardInputs] = useState<
-    CardData | undefined
-  >({
+  const [currentCardInputs, setCurrentCardInputs] = useState<CardData>({
     numberOne: '',
     numberTwo: '',
     numberThree: '',
