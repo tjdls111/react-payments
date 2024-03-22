@@ -73,8 +73,8 @@ const AddCard = ({
   const handleDelete = () => {
     if (currentCardIndex !== undefined) {
       setCardList((prev: CardData[]) => {
-        const current = prev.splice(currentCardIndex, 1)
-        return [...current]
+        prev.splice(currentCardIndex, 1)
+        return [...prev]
       })
     }
 
