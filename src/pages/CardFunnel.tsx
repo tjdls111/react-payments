@@ -5,7 +5,8 @@ import { ADD_CARD_STEP_TYPE, PAGE_TYPE } from '../types/card.ts'
 
 function CardFunnel() {
   const [page, setPage] = useState<PAGE_TYPE>('카드목록')
-  const [addCardStep, setAddCardStep] = useState<ADD_CARD_STEP_TYPE>('카드정보')
+  const [addCardStep, setAddCardStep] =
+    useState<ADD_CARD_STEP_TYPE>('카드정보입력')
   const defaultCardList = [
     {
       numberOne: '1111',

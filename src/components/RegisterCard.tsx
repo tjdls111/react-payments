@@ -48,7 +48,7 @@ const AddCard = ({
       })
     }
     setPage('카드목록')
-    setStep('카드정보')
+    setStep('카드정보입력')
     if (setCurrentCardInputs) {
       setCurrentCardInputs({
         numberOne: '',
@@ -79,7 +79,7 @@ const AddCard = ({
     }
 
     setPage('카드목록')
-    setStep('카드정보')
+    setStep('카드정보입력')
 
     if (setCurrentCardInputs) {
       setCurrentCardInputs({
@@ -104,7 +104,7 @@ const AddCard = ({
 
   return (
     <div>
-      {step === '카드정보' && (
+      {step === '카드정보입력' && (
         <AddCardInfo
           inputs={inputs}
           setInputs={setInputs}
@@ -116,7 +116,7 @@ const AddCard = ({
           }}
         />
       )}
-      {/* {step==='카드선택'&& <ChooseCard />} */}
+      {/* {step==='카드사선택'&& <ChooseCard />} */}
       {step === '생성완료' && (
         <FinishAddingCard
           inputs={inputs}

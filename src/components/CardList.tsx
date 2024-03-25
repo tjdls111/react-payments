@@ -4,6 +4,8 @@ import Card from './common/Card.tsx'
 import { CardData } from './RegisterCard.tsx'
 import { ADD_CARD_STEP_TYPE, PAGE_TYPE } from '../types/card.ts'
 import styled from 'styled-components'
+import { useMachine } from '@xstate/react'
+import { cardMachine } from '../machines/cardMachine.ts'
 
 const CardListWrapper = styled.div`
   display: flex;
@@ -34,6 +36,8 @@ const CardList = ({
   setInputs: (cardData: CardData) => void
   setCurrentCardIndex: (index: number) => void
 }) => {
+  const [state, send] = useMachine(cardMachine)
+
   return (
     <>
       <div className="root">
@@ -48,6 +52,7 @@ const CardList = ({
                   setCurrentCardIndex(index)
                   setPage('카드추가')
                   setStep('생성완료')
+                  send({ type: 'ADD_CARD' })
                 }}
               >
                 <Card props={card} />

@@ -4,5 +4,6 @@
     "source.fixAll": "explicit"
   },
   "editor.formatOnSave": true,
-  "jira-plugin.workingProject": ""
+  "jira-plugin.workingProject": "",
+  "diffEditor.codeLens": true
 }
